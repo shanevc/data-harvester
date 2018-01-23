@@ -21,6 +21,8 @@ import org.springframework.stereotype.Component;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 
 @Component
 public class Receiver {
@@ -131,7 +133,14 @@ public class Receiver {
                     HtmlPage link = client.getPage(icoBenchBaseUrl + itemAnchor.getHrefAttribute());
 
                     DomAttr videoLinkElement = link.getFirstByXPath(xpathVideoLinkElement);
-                    icoDetails.setVideoLink(videoLinkElement != null ? videoLinkElement.getValue() : "No video available");
+                    if (videoLinkElement != null) {
+                        //Find all parameters between quotes
+                        Matcher matcher = Pattern.compile("'[^']+'").matcher(videoLinkElement.getValue());
+                        //Video link is first attribute
+                        icoDetails.setVideoLink(matcher.find() ? matcher.group(0) : "No video available");
+                    } else {
+                        icoDetails.setVideoLink("No video available");
+                    }
 
                     List<SocialMediaLinks> socialMediaLinks = new ArrayList<SocialMediaLinks>();
                     List<HtmlAnchor> socialItems = (List<HtmlAnchor>) link.getByXPath(xpathSocialItems);

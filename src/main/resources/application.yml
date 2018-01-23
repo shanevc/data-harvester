@@ -8,7 +8,7 @@ application:
     icoName: ".//div[@class='content']/a"
     icoDesc: ".//div[@class='content']/p"
     itemAnchor: ".//div[@class='content']/a"
-    videoLinkElement: ".//div[@class='video']/iframe/@src"
+    videoLinkElement: ".//div[@class='video']/@onClick"
     socialItems: ".//div[@class='fixed_data']/div[@class='socials']/a"
     members: "//div[@id='team']/div[@class='box']/div[@class='row']/div[@class='col_3']"
 
