@@ -1,0 +1,47 @@
+application:
+  icoBenchBaseUrl: "https://icobench.com"
+  icoContext: "/icos"
+  pageQueryParam: "?page="
+
+  xpath:
+    icoItems: "//tr/td[@class='ico_data']"
+    icoName: ".//div[@class='content']/a"
+    icoDesc: ".//div[@class='content']/p"
+    itemAnchor: ".//div[@class='content']/a"
+    videoLinkElement: ".//div[@class='video']/iframe/@src"
+    socialItems: ".//div[@class='fixed_data']/div[@class='socials']/a"
+    members: "//div[@id='team']/div[@class='box']/div[@class='row']/div[@class='col_3']"
+
+
+logging:
+  level:
+    io.foreground: INFO
+###
+#   Database Settings
+###
+spring:
+  datasource:
+    url: jdbc:h2:file:./h2db/harvester;DB_CLOSE_DELAY=-1;DB_CLOSE_ON_EXIT=FALSE
+    platform: h2
+    username: sa
+    password:
+    driverClassName: org.h2.Driver
+  jpa:
+    database-platform: org.hibernate.dialect.H2Dialect
+    hibernate:
+      ddl-auto: update
+    properties:
+      hibernate:
+        show_sql: false
+        use_sql_comments: true
+        format_sql: true
+###
+#   H2 Settings
+###
+  h2:
+    console:
+      enabled: true
+      path: /console
+      settings:
+        trace: false
+        web-allow-others: false
