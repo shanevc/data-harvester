@@ -101,6 +101,7 @@ public class Receiver {
             pageNum++;
         }
         currentJob.setExecutionTime(System.currentTimeMillis() - startTime);
+        harvesterExecutionService.save(currentJob);
         return allIcos;
     }
 
