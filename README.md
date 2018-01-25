@@ -1,10 +1,10 @@
 Build Docker Image  
   
-	docker image build -t data-harvester-0.1 .
+	docker image build -t svancoller/images:data-harvester .
   
 Run Docker
 
-	docker container run --name data-harvester --rm -d -p 8080:8080 data-harvester-0.1
+	docker container run --name data-harvester --rm -d -p 8083:8080 svancoller/images:data-harvester
 	
 Follow logs
 	
