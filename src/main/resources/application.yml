@@ -6,7 +6,9 @@ application:
   xpath:
     icoItems: "//tr/td[@class='ico_data']"
     icoName: ".//div[@class='content']/a"
+    icoSecondaryName: ".//div[@class='ico_information']/div[@class='row']/div[@class='name']/h1"
     icoDesc: ".//div[@class='content']/p"
+    icoImageUrl: ".//div[@class='ico_information']/div[@class='row']/div[@class='image']/img"
     itemAnchor: ".//div[@class='content']/a"
     videoLinkElement: ".//div[@class='video']/@onClick"
     socialItems: ".//div[@class='fixed_data']/div[@class='socials']/a"
@@ -15,7 +17,7 @@ application:
 
 logging:
   level:
-    io.foreground: INFO
+    io.foreground: DEBUG
 
 server:
   contextPath: /harvester

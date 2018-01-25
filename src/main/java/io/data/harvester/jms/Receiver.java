@@ -3,10 +3,7 @@ package io.data.harvester.jms;
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.gargoylesoftware.htmlunit.WebClient;
-import com.gargoylesoftware.htmlunit.html.DomAttr;
-import com.gargoylesoftware.htmlunit.html.HtmlAnchor;
-import com.gargoylesoftware.htmlunit.html.HtmlElement;
-import com.gargoylesoftware.htmlunit.html.HtmlPage;
+import com.gargoylesoftware.htmlunit.html.*;
 import io.data.harvester.configuration.JmsConfig;
 import io.data.harvester.domain.HarvesterExecution;
 import io.data.harvester.models.*;
@@ -46,8 +43,14 @@ public class Receiver {
     @Value("${application.xpath.icoName}")
     private String xpathIcoName;
 
+    @Value("${application.xpath.icoSecondaryName}")
+    private String xpathIcoSecondaryName;
+
     @Value("${application.xpath.icoDesc}")
     private String xpathIcoDesc;
+
+    @Value("${application.xpath.icoImageUrl}")
+    private String xpathIcoImageUrl;
 
     @Value("${application.xpath.itemAnchor}")
     private String xpathItemAnchor;
@@ -126,12 +129,20 @@ public class Receiver {
                     HtmlElement icoDesc = htmlItem.getFirstByXPath(xpathIcoDesc);
                     HtmlAnchor itemAnchor = htmlItem.getFirstByXPath(xpathItemAnchor);
 
-                    log.debug("Name [" + icoName.asText() + "]");
-
                     icoDetails.setIcoName(icoName.asText());
                     icoDetails.setIcoDescription(icoDesc.asText());
 
                     HtmlPage link = client.getPage(icoBenchBaseUrl + itemAnchor.getHrefAttribute());
+
+                    if (icoDetails.getIcoName().equals("")) {
+                        HtmlElement icoSecondaryName = link.getFirstByXPath(xpathIcoSecondaryName);
+                        icoDetails.setIcoName(icoSecondaryName.asText());
+                    }
+
+                    log.debug("Name [" + icoName.asText() + "]");
+
+                    HtmlImage icoImage = link.getFirstByXPath(xpathIcoImageUrl);
+                    icoDetails.setIcoImageUrl(icoBenchBaseUrl + icoImage.getSrcAttribute());
 
                     DomAttr videoLinkElement = link.getFirstByXPath(xpathVideoLinkElement);
                     if (videoLinkElement != null) {

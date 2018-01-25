@@ -5,6 +5,7 @@ import java.util.List;
 public class IcoDetails {
     private String icoName;
     private String icoDescription;
+    private String icoImageUrl;
     private String videoLink;
     private List<SocialMediaLinks> socialMediaLinks;
     private List<TeamMembers> teamMembers;
@@ -23,6 +24,14 @@ public class IcoDetails {
 
     public void setIcoDescription(String icoDescription) {
         this.icoDescription = icoDescription;
+    }
+
+    public String getIcoImageUrl() {
+        return icoImageUrl;
+    }
+
+    public void setIcoImageUrl(String icoImageUrl) {
+        this.icoImageUrl = icoImageUrl;
     }
 
     public String getVideoLink() {
