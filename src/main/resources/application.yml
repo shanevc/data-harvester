@@ -16,6 +16,9 @@ application:
 logging:
   level:
     io.foreground: INFO
+
+server:
+  contextPath: /harvester
 ###
 #   Database Settings
 ###

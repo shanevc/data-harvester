@@ -28,7 +28,7 @@ public class IndexController {
     @Autowired
     private HarvesterExecutionService harvesterExecutionService;
 
-    @RequestMapping(value = "/schedule-scrape", method = RequestMethod.GET, produces = MediaType.APPLICATION_JSON_VALUE)
+    @RequestMapping(value = "/harvest", method = RequestMethod.GET, produces = MediaType.APPLICATION_JSON_VALUE)
     public HarvesterExecution scheduleScrape(@RequestParam(value = "pageNum", required = false) Integer pageNumber) {
         log.info("Sending message to queue...");
         HarvesterExecution harvesterExecution = harvesterExecutionService.save(new HarvesterExecution());
